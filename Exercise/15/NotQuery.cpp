@@ -3,10 +3,6 @@
 #include "TextQuery.h"
 #include <set>
 
-inline Query operator~(const Query &operand) {
-    return std::shared_ptr<Query_base>(new NotQuery(operand));
-}
-
 QueryResult NotQuery::eval(const TextQuery& text) const {
     //逻辑非之前能查找到该单词的行
     auto result = query.eval(text);

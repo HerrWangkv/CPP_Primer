@@ -3,10 +3,6 @@
 #include <set>
 #include <algorithm>
 
-inline Query operator&(const Query&lhs, const Query &rhs) {
-    return std::shared_ptr<Query_base>(new AndQuery(lhs, rhs));
-}
-
 QueryResult AndQuery::eval(const TextQuery& text) const {
     auto right = rhs.eval(text), left = lhs.eval(text);
     auto ret_lines = std::make_shared<lineNo>();

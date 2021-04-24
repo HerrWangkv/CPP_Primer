@@ -7,22 +7,8 @@
 #include "BinaryQuery.h"
 #include "AndQuery.h"
 #include "OrQuery.h"
-
 using std::cout;
 using std::endl;
-
-
-inline Query operator&(const Query&lhs, const Query &rhs) {
-    return std::shared_ptr<Query_base>(new AndQuery(lhs, rhs));
-}
-
-inline Query operator|(const Query&lhs, const Query &rhs) {
-    return std::shared_ptr<Query_base>(new OrQuery(lhs, rhs));
-}
-
-inline Query operator~(const Query &operand) {
-    return std::shared_ptr<Query_base>(new NotQuery(operand));
-}
 
 int main() {
     Query q1 = Query("hair") & Query("Daddy");

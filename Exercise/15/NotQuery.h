@@ -10,5 +10,9 @@ class NotQuery : public Query_base {
     std::string rep() const { return "~(" + query.rep() + ")"; }
     Query query;
 };
+//内联函数应定义在头文件中
+inline Query operator~(const Query &operand) {
+    return std::shared_ptr<Query_base>(new NotQuery(operand));
+}
 
 #endif
