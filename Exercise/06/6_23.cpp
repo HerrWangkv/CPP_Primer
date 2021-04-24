@@ -1,0 +1,38 @@
+#include <iostream>
+using std::begin;
+using std::cout;
+using std::end;
+using std::endl;
+
+void print(int i) {
+    cout << i << endl;
+}
+
+void print(int *beg, int *end) {
+    for (; beg != end; ++beg) {
+        cout << *beg << " ";
+    }
+    cout << endl;
+}
+
+void print(int arr[], size_t size) {
+    for (size_t i = 0; i != size; ++i) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+void print(int (&arr)[2]) {
+    for (auto i : arr) {
+        cout << i << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    int i = 0, j[2] = {0, 1};
+    print(i);
+    print(begin(j), end(j));
+    print(j, end(j) - begin(j));
+    print(j);
+}
