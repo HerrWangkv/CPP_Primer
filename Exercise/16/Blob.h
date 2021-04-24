@@ -3,8 +3,25 @@
 #include <memory>
 #include <vector>
 #include <initializer_list>
+#include "BlobPtr.h"
 
-template <typename T> class Blob {
+//尽管已经include了头文件，仍然必须声明
+template <typename>
+class BlobPtr;
+template <typename>
+class Blob;
+//模板函数
+template <typename T>
+bool operator==(const Blob<T> &, const Blob<T> &);
+
+template <typename T>
+class Blob
+{
+    //每个Blob实例仅将访问权限授予用相同类型实例化的BlobPtr和相等运算符
+    //<T>表示其也是模板
+    friend class BlobPtr<T>;
+    friend bool operator==<T>(const Blob<T> &, const Blob<T> &);
+
 public:
     //T表示Blob保存的元素类型
     typedef T value_type;
@@ -24,6 +41,17 @@ public:
     const T &front() const;
     const T &back() const;
     const T &operator[](size_type) const;
+    //注意begin和end返回的都是右值
+    BlobPtr<T> begin() { return BlobPtr<T>(*this); }
+    BlobPtr<T> end() { return BlobPtr<T>(*this, size()); }
+    const BlobPtr<T> cbegin() const {
+        const BlobPtr<T> ret(*this);
+        return ret;
+    }
+    const BlobPtr<T> cend() const {
+        const BlobPtr<T> ret(*this, size());
+        return ret;
+    }
 
 private:
     std::shared_ptr<std::vector<T>> data;
@@ -65,6 +93,11 @@ template <typename T>
 void Blob<T>::check(size_type i, const std::string &msg) const {
     if (i >= data->size())
         throw std::out_of_range(msg);
+}
+//模板函数声明和定义都必须在头文件
+template <typename T>
+bool operator==(const Blob<T> &lhs, const Blob<T> &rhs) {
+    return (lhs.data == rhs.data);
 }
 
 #endif
