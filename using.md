@@ -47,3 +47,11 @@ public:
 如果派生类含有自己的数据成员，则这些成员将被默认初始化。
 
 一个构造函数的using声明不会改变构造函数的访问级别。基类的私有构造函数在派生类中还是一个私有构造函数。且一个using声明不会改变explicit或者constexpr的继承。
+
+## 5 模板类型别名
+```cpp
+template<typename T> using twin = pair<T, T>;
+template<typename T> using partNo = pair<T, unsigned>;
+twin<string> authors;//pair<string, string>
+partNo<string> books;//pair<string, unsigned>
+```

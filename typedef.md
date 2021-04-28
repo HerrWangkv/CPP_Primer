@@ -25,3 +25,9 @@ typedef decltype(lengthCompare) func2; // func 和 func2等价
 typedef bool (*funcP)(const string &, const string &);
 typedef decltype(lengthCompare) *funcP2; // funcP 和 funcP2等价
 ```
+## 5 模板类型别名
+假设Blob是一个模板类：
+```cpp
+typedef Blob<string> StrBlob
+```
+typedef只允许我们为模板的**某个实例**定义类型别名。如果想要为模板类定义类型别名，需要使用using。
