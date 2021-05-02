@@ -61,3 +61,11 @@ decltype(ci) x = 0; // x是 const int
   int f(int*, int);
   decltype(f) *f1(int);
   ```
+
+## 5 左值/右值/右值引用
+```cpp
+int i;
+decltype(42);//int
+decltype(i);//int&
+decltype(std::move(i));//int &&
+```
