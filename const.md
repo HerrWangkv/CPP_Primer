@@ -1,5 +1,5 @@
-# const 用法，详见[const 限定符](./02_变量和基本类型.md#4-const-限定符)
-## 顶层const
+# const 用法
+## 1 顶层const
 1. 基本数据类型 
    - const对象 可以被 同类型 非const对象 初始化
    - const对象 可以用于初始化 同类型 非const对象
@@ -17,7 +17,7 @@
     *cptr = 42;
     ```
 
-## 底层const
+## 2 底层const
 1. 常量引用
    - const对象 不能被 非常量引用 绑定
    - const引用 可以绑定 同类型 或 其他类型但可以进行类型转换的 非常量(有可能改变值)
@@ -64,3 +64,15 @@
     const int *pci = new const int(1024);
     const string *pcs = new const string;
     ```
+
+## 3 其他特性
+1. const修饰的是最基本的数据类型：
+   ```cpp
+   typedef double *b;
+   //const修饰基本数据类型(此处为double, *只是声明符)
+   const double *cp1;//cp1为指向常量的指针
+   //const修饰基本数据类型(此处为指针，而不是double)
+   double *const cp2;//cp2为常量指针
+   //const修饰基本数据类型(此处为指针，而不是double)
+   const b cp3 = 0; // cp3是指向double的常量指针，而不是指向常量的指针！！！
+   ```
